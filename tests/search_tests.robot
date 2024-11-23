@@ -1,11 +1,10 @@
 *** Settings ***
 Resource    ../resources/settings.robot
-Resource    ../resources/variables.robot
+Resource    ../resources/keywords/search_keywords.robot
 
 *** Test Cases ***
 Search On Google
     [Tags]    search
-    Open Google Search Page
-    Search For Term    ${SEARCH_TERM}
-    Verify Search Results    ${EXPECTED_TEXT}
-    [Teardown]    Close Browser
+    Open Google Homepage
+    Search For Term    Robot Framework
+    Verify Search Results
