@@ -1,5 +1,5 @@
-Resource    ../resources/settings.robot
-Resource    ../resources/keywords/search_keywords.robot
+Resource    ../../resources/settings.robot
+Resource    ../../resources/keywords/search_keywords.robot
 
 *** Test Cases ***
 Search On Google
