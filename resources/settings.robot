@@ -1,13 +1,15 @@
 *** Settings ***
 Library    SeleniumLibrary
 Resource   variables.robot
+Resource   locators.robot
 
 Suite Setup    Setup Suite
 Suite Teardown    Teardown Suite
 
 *** Keywords ***
 Setup Suite
-    Log    Suite Setup Completed
+    Log    Starting Test Suite
 
 Teardown Suite
-    Log    Suite Teardown Completed
+    Close All Browsers
+    Log    Ending Test Suite
