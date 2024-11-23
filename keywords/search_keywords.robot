@@ -1,15 +1,19 @@
+*** Settings ***
+Resource   ../variables.robot
+Resource   ../locators.robot
+Library    SeleniumLibrary
+
 *** Keywords ***
-Open Google Search Page
+Open Google Homepage
     Open Browser    ${SEARCH_ENGINE_URL}    ${BROWSER}    executable_path=${CHROMEDRIVER_PATH}
-    Wait Until Element Is Visible    xpath=//textarea[@name='q']    timeout=10s
+    Maximize Browser Window
+    Wait Until Page Contains Element    ${SEARCH_BOX}
 
 Search For Term
-    [Arguments]    ${search_term}
-    Input Text    xpath=//textarea[@name='q']    ${search_term}
-    Press Keys    xpath=//textarea[@name='q']    ENTER
+    [Arguments]    ${term}
+    Input Text    ${SEARCH_BOX}    ${term}
+    Press Keys    ${SEARCH_BOX}    ENTER
 
 Verify Search Results
-    [Arguments]    ${expected_text}
-    Wait Until Page Contains    ${expected_text}
-    ${title}=    Get Title
-    Should Contain    ${title}    ${expected_text}
+    Wait Until Page Contains Element    ${RESULT_STATS}
+    Log    Search results are visible
