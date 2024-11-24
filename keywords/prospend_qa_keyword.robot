@@ -6,4 +6,3 @@ Login To QA Website
     Input Text      ${PROSPEND_PASSWORD_BOX}   ${PROSPEND_PASSWORD}
     Click Button    ${PROSPEND_LOGIN_BTN}
     Wait Until Page Contains Element    ${PROSPEND_LOGOUT_BTN}    timeout=10s
-    [Teardown]     Close Browser
