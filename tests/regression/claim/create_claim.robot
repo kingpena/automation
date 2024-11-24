@@ -5,6 +5,6 @@ Resource    ../../../resources/locators.robot
 Resource    ../../../keywords/prospend_qa_keyword.robot
 
 *** Test Cases ***
-Login To Prospend QA ENv
+Login To Prospend QA ENV
     [Tags]    regression  all  claim
     Login To QA Website
