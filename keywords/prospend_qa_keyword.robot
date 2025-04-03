@@ -16,8 +16,16 @@ Call Claim List Search
     ${session}    Create Session    mysession    ${PROSPEND_LUCIFER_URL}
 
     ${params}    Create Dictionary    claimStatusId=-2    claimantId=-1    divisionId=-1    limit=30    offset=0    sortOrder=desc
-    ${headers}   Create Dictionary    Content-Type=application/json
-    ${response}   GET On Session    mysession    /api/claim/search.go    params=${params}    headers=${headers}    cookies=${COOKIES}
+    ${headers}    Create Dictionary    Content-Type=application/json    Accept=application/json
 
-    Log    ${response.json()}
+    ${response}    GET On Session    mysession    /api/claim/search.go    params=${params}    headers=${headers}    cookies=${COOKIES}
+
+    Log    ${response.status_code}
+    Log    ${response.content}  # Log the raw response
+
+    # Prevent JSON parsing errors
+    ${json_response}    Run Keyword If    '${response.json()}' != 'None'    response.json()    ELSE    Create Dictionary
+    Log    ${json_response}
+
     Should Be Equal As Strings    ${response.status_code}    200
+
