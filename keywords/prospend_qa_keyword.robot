@@ -8,17 +8,23 @@ Login To QA Website
     Wait Until Page Contains Element    ${PROSPEND_LOGOUT_BTN}    timeout=10s
 
     ${cookies}    Get Cookies
-    Set Global Variable    ${COOKIES}    ${cookies}  # Store cookies globally
-
-    Close Browser
+    ${cookie_string}    Evaluate    json.dumps(${cookies})    json
+    Set Suite Variable    ${COOKIES}    ${cookie_string}  # Store cookies for reuse
 
 Call Claim List Search
-    ${session}    Create Session    mysession    ${PROSPEND_LUCIFER_URL}
+    Create Session    mysession    ${PROSPEND_URL}
 
     ${params}    Create Dictionary    claimStatusId=-2    claimantId=-1    divisionId=-1    limit=30    offset=0    sortOrder=desc
     ${headers}    Create Dictionary    Content-Type=application/json    Accept=application/json
 
-    ${response}   GET  mysession    /api/claim/search.go    params=${params}    headers=${headers}    cookies=${COOKIES}
+    # Convert cookies to dictionary (if needed)
+    ${cookie_dict}    Evaluate    json.loads('''${COOKIES}''')    json
+
+    ${response}    GET On Session    mysession    ${CLAIM_SEARCH_API}    params=${params}    headers=${headers}    cookies=${cookie_dict}
+
+    Log    Response Status: ${response.status_code}
+    Log    Response Body: ${response.json()}
 
     Should Be Equal As Strings    ${response.status_code}    200
 
+    Close Browser
