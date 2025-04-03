@@ -18,7 +18,7 @@ Call Claim List Search
     ${params}    Create Dictionary    claimStatusId=-2    claimantId=-1    divisionId=-1    limit=30    offset=0    sortOrder=desc
     ${headers}    Create Dictionary    Content-Type=application/json    Accept=application/json
 
-    ${response}    GET On Session    mysession    /api/claim/search.go    params=${params}    headers=${headers}    cookies=${COOKIES}
+    ${response}   GET  mysession    /api/claim/search.go    params=${params}    headers=${headers}    cookies=${COOKIES}
 
     Should Be Equal As Strings    ${response.status_code}    200
 
