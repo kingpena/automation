@@ -7,3 +7,4 @@ ${EXPECTED_TEXT}       Robot Framework
 ${PROSPEND_LUCIFER_URL}  https://emsdev.lucifer.psqa.net/
 ${PROSPEND_USERNAME}     xbits
 ${PROSPEND_PASSWORD}     test
+${COOKIES}    # Global variable for storing cookies
