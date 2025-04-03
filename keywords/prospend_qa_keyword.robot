@@ -8,8 +8,12 @@ Login To QA Website
     Wait Until Page Contains Element    ${PROSPEND_LOGOUT_BTN}    timeout=10s
 
     ${cookies}    Get Cookies
-    ${cookie_string}    Evaluate    json.dumps(${cookies})    json
-    Set Suite Variable    ${COOKIES}    ${cookie_string}  # Store cookies for reuse
+    ${cookie_dict}    Create Dictionary
+    FOR    ${cookie}    IN    @{cookies}
+        Set To Dictionary    ${cookie_dict}    ${cookie["name"]}    ${cookie["value"]}
+    END
+    ${cookie_string}    Evaluate    json.dumps(${cookie_dict})    json
+    Set Suite Variable    ${COOKIES}    ${cookie_string
 
 Call Claim List Search
     Create Session    mysession    ${PROSPEND_URL}
