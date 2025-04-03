@@ -6,3 +6,12 @@ Login To QA Website
     Input Text      ${PROSPEND_PASSWORD_BOX}   ${PROSPEND_PASSWORD}
     Click Button    ${PROSPEND_LOGIN_BTN}
     Wait Until Page Contains Element    ${PROSPEND_LOGOUT_BTN}    timeout=10s
+
+    ${cookies}    Get Cookies
+    Close Browser
+
+Call Claim List Search
+    ${session}    Create Session    mysession    ${PROSPEND_LUCIFER_URL}
+    ${response}    GET    mysession    /api/claim/search.go?claimStatusId=-2&claimantId=-1&divisionId=-1&searchString=&limit=30&offset=0&sortOrder=desc   cookies=${cookies}
+    Log    ${response.json()}
+    Should Be Equal As Strings    ${response.status_code}    200
