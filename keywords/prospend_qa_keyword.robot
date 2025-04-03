@@ -14,6 +14,9 @@ Login To QA Website
 
 Call Claim List Search
     ${session}    Create Session    mysession    ${PROSPEND_LUCIFER_URL}
-    ${response}    GET    mysession    /api/claim/search.go?claimStatusId=-2&claimantId=-1&divisionId=-1&searchString=&limit=30&offset=0&sortOrder=desc   cookies=${COOKIES}
+
+    ${params}    Create Dictionary    claimStatusId=-2    claimantId=-1    divisionId=-1    searchString=    limit=30    offset=0    sortOrder=desc
+    ${response}    GET    mysession    /api/claim/search.go    params=${params}    cookies=${cookies}
+
     Log    ${response.json()}
     Should Be Equal As Strings    ${response.status_code}    200
