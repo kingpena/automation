@@ -1,5 +1,7 @@
 *** Keywords ***
+
 Login To QA Website
+    Create Session    mysession    ${PROSPEND_LUCIFER_URL}
     Open Browser     ${PROSPEND_LUCIFER_URL}    ${BROWSER}    executable_path=${CHROMEDRIVER_PATH}
     Maximize Browser Window
     Input Text      ${PROSPEND_USERNAME_BOX}    ${PROSPEND_USERNAME}
@@ -7,36 +9,26 @@ Login To QA Website
     Click Button    ${PROSPEND_LOGIN_BTN}
     Wait Until Page Contains Element    ${PROSPEND_LOGOUT_BTN}    timeout=10s
 
-    ${cookies}    Get Cookies
-
-    # Check if cookies exist
-    Run Keyword If    '${cookies}' == '{}'    Log    "No cookies found!"
-
-    # Ensure cookies are in dictionary format
-    ${cookie_dict}    Create Dictionary
-    FOR    ${cookie}    IN    @{cookies}
-        Set To Dictionary    ${cookie_dict}    ${cookie["name"]}    ${cookie["value"]}
-    END
-
-    # Convert to JSON for storage
-    ${cookie_json}    Evaluate    json.dumps(${cookie_dict})    json
-    Set Suite Variable    ${COOKIES}    ${cookie_json}
-
+    ${cookies}    Get Cookies    mysession
+    # Store cookies in a variable for reuse
+    Set Suite Variable    ${COOKIES}    ${cookies}
 
 Call Claim List Search
-    Create Session    mysession    ${PROSPEND_URL}
+    Create Session    mysession    ${PROSPEND_LUCIFER_URL}
 
+    # Set up request parameters and headers for the API call
     ${params}    Create Dictionary    claimStatusId=-2    claimantId=-1    divisionId=-1    limit=30    offset=0    sortOrder=desc
     ${headers}    Create Dictionary    Content-Type=application/json    Accept=application/json
 
-    # Convert cookies to dictionary (if needed)
-    ${cookie_dict}    Evaluate    json.loads('''${COOKIES}''')    json
+    # Make the API call to retrieve the claim list
+    ${response}    GET On Session    mysession    ${PROSPEND_LUCIFER_URL}    params=${params}    headers=${headers}    cookies=${COOKIES}
 
-    ${response}    GET On Session    mysession    ${CLAIM_SEARCH_API}    params=${params}    headers=${headers}    cookies=${cookie_dict}
-
+    # Log the status code and response body for debugging purposes
     Log    Response Status: ${response.status_code}
     Log    Response Body: ${response.json()}
 
+    # Assert that the response status code is 200 (OK)
     Should Be Equal As Strings    ${response.status_code}    200
 
+    # Close the browser after the test
     Close Browser
