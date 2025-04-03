@@ -20,12 +20,5 @@ Call Claim List Search
 
     ${response}    GET On Session    mysession    /api/claim/search.go    params=${params}    headers=${headers}    cookies=${COOKIES}
 
-    Log    ${response.status_code}
-    Log    ${response.content}  # Log the raw response
-
-    # Prevent JSON parsing errors
-    ${json_response}    Run Keyword If    '${response.json()}' != 'None'    response.json()    ELSE    Create Dictionary
-    Log    ${json_response}
-
     Should Be Equal As Strings    ${response.status_code}    200
 
