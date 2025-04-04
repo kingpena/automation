@@ -1,7 +1,7 @@
 *** Keywords ***
 
 Generate Random Invoice Number
-    ${value}=  Evaluate  "INV-AUTOMATION-TEST" + str(random.randint(1000, 9999))  modules=random
+    ${value}=  Evaluate  "INV-AUTOMATION-TEST-" + str(random.randint(100, 9999))  modules=random
     [Return]  ${value}
 
 Replace Invoice Number
