@@ -1,3 +1,5 @@
+*** Keywords ***
+
 Generate Random Invoice Number
     ${value}=  Evaluate  "INV-" + str(random.randint(1000, 9999))  modules=random
     [Return]  ${value}
