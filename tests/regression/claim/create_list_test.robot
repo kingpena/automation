@@ -21,6 +21,7 @@ Create Supplier Invoice
     Create Supplier Invoice
 
 Open Latest Claim
+    [Tags]    regression  all  claim
     Build And Open URL  /vapp/claim/invoice/${CLAIM_ID}
 
 Close Test Automation
