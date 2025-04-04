@@ -1,7 +1,7 @@
 *** Settings ***
 Library    RequestsLibrary
 Library    SeleniumLibrary
-Library  BuiltIn
+Library  String
 Resource   ../keywords/keywords.robot
 Resource   variables.robot
 Resource   locators.robot
