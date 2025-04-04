@@ -13,3 +13,7 @@ Login To Prospend QA ENV
 Claim List Search Valid Request
     [Tags]    regression  all  claim
     Call Claim List Search
+
+Create Supplier Invoice
+    [Tags]    regression  all  claim
+    Create Supplier Invoice
