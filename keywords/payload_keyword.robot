@@ -84,4 +84,4 @@ Supplier Invoice Request Body
     ...    taxFlag="e"
     ...    variance=None
     ...    workflowId=1574
-    [Return]    ${payload}
+    [Return]    ${CLAIM_INVOICE}
