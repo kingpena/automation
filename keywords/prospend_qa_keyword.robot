@@ -34,6 +34,31 @@ Create Supplier Invoice
     Log    ${response.json()}
     Should Be Equal As Strings    ${response.status_code}    200
 
+    ${CLAIM_ID}= Extract ClaimId From Response ${response}
+    Log ${CLAIM_ID}
+
+Extract ClaimId From Response
+    [Arguments]  ${response}
+    ${json_data}=  Convert To JSON  ${response.text}  # Convert the response to a JSON object
+    ${claim_id}=  Get From JSON  ${json_data}  claimId  # Extract claimId from JSON
+    [Return]  ${claim_id}
+
+Build And Open URL
+    [Arguments]  ${ENDPOINT}
+    ${FULL_URL}=  Build URL  ${ENDPOINT}  # Build the dynamic URL
+    Open URL In New Tab  ${FULL_URL}  # Open the URL in a new tab
+
+Build URL
+    [Arguments]  ${ENDPOINT}
+    ${URL}=  Set Variable  ${PROSPEND_LUCIFER_URL}${ENDPOINT}  # Construct the full URL dynamically
+    [Return]  ${URL}
+
+Open URL In New Tab
+    [Arguments]  ${URL}
+    Execute JavaScript  window.open('${URL}', '_blank')  # Opens the URL in a new tab
+    Sleep  3s  # Wait for the new tab to open
+    Switch Window  NEW  # Switch to the new tab
+
 End Test Automation
     # Close the browser after the test
     Close Browser
