@@ -14,14 +14,11 @@ Login To QA Website
     Set Suite Variable    ${COOKIES}    ${cookies}
 
 Call Claim List Search
-    Create Session    mysession    ${PROSPEND_LUCIFER_URL}
-
     # Set up request parameters and headers for the API call
     ${params}    Create Dictionary    claimStatusId=-2    claimantId=-1    divisionId=-1    limit=30    offset=0    sortOrder=desc
-    ${headers}    Create Dictionary    Content-Type=application/json    Accept=application/json
 
     # Make the API call to retrieve the claim list
-    ${response}    GET On Session    mysession    /api/claim/search.go    params=${params}    headers=${headers}    cookies=${COOKIES}
+    ${response}=   Send GET Request With Param    /api/claim/search.go    ${params}
 
     # Log the status code and response body for debugging purposes
     Log    Response Status: ${response.status_code}
@@ -31,7 +28,6 @@ Call Claim List Search
     Should Be Equal As Strings    ${response.status_code}    200
 
 Create Supplier Invoice
-    Create Session    mysession    ${PROSPEND_LUCIFER_URL}
     ${response}=   Send POST Request With Body     /api/claim/fulladd.go    ${SUPPLIER_INVOICE}
     Log    Response Status: ${response.status_code}
     Log    ${response.json()}
