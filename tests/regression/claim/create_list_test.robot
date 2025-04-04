@@ -5,6 +5,7 @@ Resource    ../../../resources/variables_claim_payload.robot
 Resource    ../../../resources/locators.robot
 Resource    ../../../keywords/prospend_qa_keyword.robot
 Resource    ../../../keywords/api_request_keyword.robot
+Resource    ../../../keywords/invoice_payload_keyword.robot
 
 *** Test Cases ***
 Login To Prospend QA ENV
