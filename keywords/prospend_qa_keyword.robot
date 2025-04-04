@@ -32,6 +32,7 @@ Call Claim List Search
 
 Create Supplier Invoice
     Create Session    mysession    ${PROSPEND_LUCIFER_URL}
+    ${SUPPLIER_INVOICE_DICT}    Convert To Dictionary    ${SUPPLIER_INVOICE}
     ${response}    POST On Session   mysession    /api/claim/fulladd.go  data=${SUPPLIER_INVOICE}    headers=Content-Type=application/json    cookies=${COOKIES}
     Log    Response Status: ${response.status_code}
     Log    ${response.json()}
