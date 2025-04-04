@@ -30,5 +30,11 @@ Call Claim List Search
     # Assert that the response status code is 200 (OK)
     Should Be Equal As Strings    ${response.status_code}    200
 
+Create Supplier Invoice
+    Create Session    mysession    ${PROSPEND_LUCIFER_URL}
+    ${response}    POST On Session   mysession    /api/claim/fulladd.go   json=${CLALIM_INVOICE}
+    Log    ${response.json()}
+    Should Be Equal As Strings    ${response.status_code}    200
+
     # Close the browser after the test
     Close Browser
