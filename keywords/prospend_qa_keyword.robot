@@ -32,9 +32,15 @@ Call Claim List Search
 
 Create Supplier Invoice
     Create Session    mysession    ${PROSPEND_LUCIFER_URL}
-    ${response}    POST On Session   mysession    /api/claim/fulladd.go   json=${CLAIM_INVOICE}
-    Log    ${response.json()}
+    ${response}    POST On Session   mysession    /api/claim/fulladd.go   json=${CLAIM_INVOICE}    cookies=${COOKIES}
     Should Be Equal As Strings    ${response.status_code}    200
+    TRY
+        ${json_response}    Set Variable    ${response.json()}
+        Log    Response JSON: ${json_response}
+    EXCEPT
+        Log    Response is not JSON: ${response.content}
+    END
+
 
     # Close the browser after the test
     Close Browser
