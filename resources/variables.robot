@@ -5,6 +5,8 @@ ${SEARCH_ENGINE_URL}   https://www.google.com
 ${SEARCH_TERM}         Robot Framework
 ${EXPECTED_TEXT}       Robot Framework
 ${PROSPEND_LUCIFER_URL}  https://emsdev.lucifer.psqa.net/
-${PROSPEND_USERNAME}     xbits
-${PROSPEND_PASSWORD}     test
+${PROSPEND_USERNAME}     kylie.magenta
+${PROSPEND_PASSWORD}     kylie123
+${PROSPEND_USERNAME_ADMIN}     xbits
+${PROSPEND_PASSWORD_ADMIN}     test
 ${COOKIES}    # Global variable for storing cookies
