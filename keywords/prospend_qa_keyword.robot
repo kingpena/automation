@@ -34,7 +34,7 @@ Create Supplier Invoice
     Log    ${response.json()}
     Should Be Equal As Strings    ${response.status_code}    200
 
-    ${CLAIM_ID}= Extract ClaimId From Response ${response}
+    ${CLAIM_ID}=    Extract ClaimId From Response ${response}
     Log ${CLAIM_ID}
 
 Extract ClaimId From Response
