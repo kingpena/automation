@@ -1,6 +1,7 @@
 *** Settings ***
 Resource    ../../../resources/settings.robot
 Resource    ../../../resources/variables.robot
+Resource    ../../../resources/variables_claim_payload.robot
 Resource    ../../../resources/locators.robot
 Resource    ../../../keywords/prospend_qa_keyword.robot
 

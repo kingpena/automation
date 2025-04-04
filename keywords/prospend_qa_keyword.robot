@@ -21,7 +21,7 @@ Call Claim List Search
     ${headers}    Create Dictionary    Content-Type=application/json    Accept=application/json
 
     # Make the API call to retrieve the claim list
-    ${response}    GET On Session    mysession    ${PROSPEND_LUCIFER_URL}    params=${params}    headers=${headers}    cookies=${COOKIES}
+    ${response}    GET On Session    mysession    /api/claim/search.go    params=${params}    headers=${headers}    cookies=${COOKIES}
 
     # Log the status code and response body for debugging purposes
     Log    Response Status: ${response.status_code}
