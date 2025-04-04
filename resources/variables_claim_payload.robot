@@ -1,5 +1,5 @@
 *** Variables ***
-${RANDON_INVOICE_NUMBER}    Evaluate    "Text_automation-" + str(random.randint(1000, 9999))  random
+${RANDOM_INVOICE_NUMBER}    Evaluate    "Text_automation-" + str(random.randint(1000, 9999))  random
 
 Supplier Invoice Request Body
     [Arguments]    ${RANDOM_INVOICE_NUMBER}
