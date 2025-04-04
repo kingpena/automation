@@ -4,6 +4,7 @@ Resource    ../../../resources/variables.robot
 Resource    ../../../resources/variables_claim_payload.robot
 Resource    ../../../resources/locators.robot
 Resource    ../../../keywords/prospend_qa_keyword.robot
+Resource    ../../../keywords/payload_keyword.robot
 
 *** Test Cases ***
 Login To Prospend QA ENV
