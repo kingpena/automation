@@ -10,3 +10,4 @@ ${PROSPEND_PASSWORD}     kylie123
 ${PROSPEND_USERNAME_ADMIN}     xbits
 ${PROSPEND_PASSWORD_ADMIN}     test
 ${COOKIES}    # Global variable for storing cookies
+${HEADERS}    accept=application/json    accept-language=en-US,en;q=0.9    cache-control=no-cache    content-type=application/json
