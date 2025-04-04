@@ -4,6 +4,7 @@ Library    SeleniumLibrary
 Library  String
 Library  Collections
 Library  OperatingSystem
+Library  JSONLibrary
 Library  BuiltIn
 Library  random
 Resource   ../keywords/keywords.robot
