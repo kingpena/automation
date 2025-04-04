@@ -28,11 +28,11 @@ Call Claim List Search
     Should Be Equal As Strings    ${response.status_code}    200
 
 Create Supplier Invoice
-    Generate Supplier Invoice With Random Invoice No
-   # ${response}=   Send POST Request With Body     /api/claim/fulladd.go    ${SUPPLIER_INVOICE}
-   # Log    Response Status: ${response.status_code}
-   # Log    ${response.json()}
-   # Should Be Equal As Strings    ${response.status_code}    200
+    ${supplier_invoice}=    Generate Supplier Invoice With Random Invoice No
+    ${response}=   Send POST Request With Body     /api/claim/fulladd.go    ${supplier_invoice}
+    Log    Response Status: ${response.status_code}
+    Log    ${response.json()}
+    Should Be Equal As Strings    ${response.status_code}    200
 
 End Test Automation
     # Close the browser after the test
