@@ -25,6 +25,7 @@ Call Claim List Search
 
     # Log the status code and response body for debugging purposes
     Log    Response Status: ${response.status_code}
+    Log    ${response.json()}
 
     # Assert that the response status code is 200 (OK)
     Should Be Equal As Strings    ${response.status_code}    200
