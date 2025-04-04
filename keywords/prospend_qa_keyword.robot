@@ -32,7 +32,7 @@ Call Claim List Search
 
 Create Supplier Invoice
     Create Session    mysession    ${PROSPEND_LUCIFER_URL}
-    ${response}    POST On Session   mysession    /api/claim/fulladd.go  headers=Content-Type=application/json   ${SUPPLIER_INVOICE}    cookies=${COOKIES}
+    ${response}    POST On Session   mysession    /api/claim/fulladd.go  data=${SUPPLIER_INVOICE}    headers=Content-Type=application/json    cookies=${COOKIES}
     Log    Response Status: ${response.status_code}
     Log    ${response.json()}
     Should Be Equal As Strings    ${response.status_code}    200
