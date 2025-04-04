@@ -17,3 +17,7 @@ Claim List Search Valid Request
 Create Supplier Invoice
     [Tags]    regression  all  claim
     Create Supplier Invoice
+
+Close Test Automation
+    [Tags]    regression  all
+    End Test Automation

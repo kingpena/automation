@@ -32,11 +32,23 @@ Call Claim List Search
 
 Create Supplier Invoice
     Create Session    mysession    ${PROSPEND_LUCIFER_URL}
+    ${invoiceNo}=  Generate Random Invoice No
+    ${SUPPLIER_INVOICE}=  Create Supplier Invoice  ${invoiceNo}
     ${headers}    Create Dictionary    Content-Type=application/json    Accept=application/json
     ${response}    POST On Session   mysession    /api/claim/fulladd.go  data=${SUPPLIER_INVOICE}    headers=${headers}   cookies=${COOKIES}
     Log    Response Status: ${response.status_code}
     Log    ${response.json()}
     Should Be Equal As Strings    ${response.status_code}    200
 
+Generate Random Invoice No
+    ${random_invoice_no}=  Generate Random String  10  # Generate a 10-character random string for the invoice number
+    [Return]  invoice-${random_invoice_no}
+
+Create Supplier Invoice
+    [Arguments]  ${invoiceNo}
+    ${invoice}=  Create Dictionary  claimId=None  claimTypeId=12  claimTypeDesc=Supplier Invoice  claimStatusId=0  claimStatusDesc=None  created=None  billCycleId=None  claimDateStart=2025-04-04  claimDateTo=None  claimantId=4645  claimantName=Kylie Magenta  authorityId=None  divisionId=None  departmentId=184  claimDivisionId=1141  departmentName=Australia  supplierId=18320  supplierCode=NAKAMA  abn=None  payTo=Nakama  reference=None  invoiceNo=${invoiceNo}  dueDate=  name=Supplier Invoice  linkClaimIds=None  taxFlag=e  disputedTotal=0  personalTotal=0  expenseTotal=0  workflowId=1574  stepNo=None  completedOn=None  completePurchaseOrder=False  requiresPurchaseOrder=False  purchaseNo=None  cancelDate=None  importId=None  exportId=None  exportRef=None  expenses=[]  steps=[]  notes=[]  fields=[]  forwardBalance=0  newBalance=0  newCredits=0  invoiceScanning=False  paymentInfoAcknowledged=False  cardId=None  linkClaimMarkedForClose=False  cardStatus=None  scheduledFreezeOn=None  payByCheque=Y  accountName=  accountBsb=  accountNo=  bpayReference=None  bpayBiller=None  variance=None  allowAcknowledgePaymentInfoMismatch=False  externalBillLink=None  approvalComment=None  approverAcknowledged=None  source=None  purchaseOrder={deliveryDate=None, deliveryAddr1=None, deliveryAddr2=None, deliveryAddr3=None, country=None, contactCompany=None, contactName=None, contactPhone=None, deliveryInstructions=None, showAmounts=y, emailPO=False, emailTo=  }  cardOrder={cardOrderId=None, companyId=None, claimId=None, cardholderPhone=None, orderIssuedOn=None, orderIssuedBy=None, cardEndDate=None, status=None, cardOrderStatus=None, deliveryEstimate=None, trackingUrl=None, lifetimeLimitAmount=None, transactionLimitAmount=None, dailyLimitAmount=None, monthlyLimitAmount=None, billingAddress={address1=None, address2=None, city=None, state=None, postCode=None, countryCode=None}, rules=[], cardLabel=None, validationStatus=None, validationReason=None, embossedName=None}  invoiceApprovalOption=GO_THROUGH_APPROVAL  supplierValidationAcknowledged=False
+    [Return]  ${invoice}
+
+End Test Automation
     # Close the browser after the test
     Close Browser
