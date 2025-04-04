@@ -44,7 +44,7 @@ Supplier Invoice Request Body
     ...    forwardBalance=0
     ...    importId=None
     ...    invoiceApprovalOption="GO_THROUGH_APPROVAL"
-    ...    invoiceNo=${RANDOM_INVOICE_NUMBER}
+    ...    invoiceNo="automation_test"
     ...    invoiceScanning=False
     ...    linkClaimIds=None
     ...    linkClaimMarkedForClose=False
